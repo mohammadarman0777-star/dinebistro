@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Dine Bistro</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+body{
+margin:0;
+font-family:Georgia, serif;
+background:#2b0000;
+color:white;
+text-align:center;
+}
+header{
+background:black;
+padding:20px;
+font-size:28px;
+color:gold;
+font-weight:bold;
+}
+.menu{
+padding:20px;
+}
+.item{
+background:#3b0000;
+margin:12px;
+padding:15px;
+border-radius:10px;
+}
+input{
+width:60px;
+padding:5px;
+}
+button{
+padding:12px 25px;
+background:gold;
+border:none;
+border-radius:8px;
+font-weight:bold;
+margin-top:15px;
+cursor:pointer;
+}
+.total{
+font-size:22px;
+color:gold;
+margin-top:20px;
+}
+</style>
+</head>
+
+<body>
+
+<header>Dine Bistro 👑</header>
+
+<div class="menu">
+
+<h2>Classic Menu</h2>
+
+<div class="item">
+Chicken Biryani Half – ₹60  
+<br>Qty: <input type="number" id="i1" min="0" value="0" onchange="calculateTotal()">
+</div>
+
+<div class="item">
+Chicken Biryani Full – ₹90  
+<br>Qty: <input type="number" id="i2" min="0" value="0" onchange="calculateTotal()">
+</div>
+
+<div class="item">
+Soya Chaap – ₹80  
+<br>Qty: <input type="number" id="i3" min="0" value="0" onchange="calculateTotal()">
+</div>
+
+<div class="item">
+Paneer Tikka – ₹90  
+<br>Qty: <input type="number" id="i4" min="0" value="0" onchange="calculateTotal()">
+</div>
+
+<h2>Lucknow Special</h2>
+
+<div class="item">
+Lucknowi Chicken Biryani – ₹120  
+<br>Qty: <input type="number" id="i5" min="0" value="0" onchange="calculateTotal()">
+</div>
+
+<div class="item">
+Mutton Biryani – ₹180  
+<br>Qty: <input type="number" id="i6" min="0" value="0" onchange="calculateTotal()">
+</div>
+
+<div class="item">
+Galouti Kebab – ₹160  
+<br>Qty: <input type="number" id="i7" min="0" value="0" onchange="calculateTotal()">
+</div>
+
+<div class="item">
+Butter Chicken – ₹190  
+<br>Qty: <input type="number" id="i8" min="0" value="0" onchange="calculateTotal()">
+</div>
+
+<div class="total">
+Total Bill: ₹ <span id="total">0</span>
+</div>
+
+<button onclick="orderNow()">Order on WhatsApp</button>
+
+</div>
+
+<script>
+
+function calculateTotal(){
+let prices=[60,90,80,90,120,180,160,190];
+let ids=["i1","i2","i3","i4","i5","i6","i7","i8"];
+let total=0;
+
+for(let i=0;i<ids.length;i++){
+let qty=parseInt(document.getElementById(ids[i]).value) || 0;
+total += qty * prices[i];
+}
+
+document.getElementById("total").innerText = total;
+}
+
+function orderNow(){
+
+let items=[
+"Chicken Biryani Half ₹60",
+"Chicken Biryani Full ₹90",
+"Soya Chaap ₹80",
+"Paneer Tikka ₹90",
+"Lucknowi Chicken Biryani ₹120",
+"Mutton Biryani ₹180",
+"Galouti Kebab ₹160",
+"Butter Chicken ₹190"
+];
+
+let prices=[60,90,80,90,120,180,160,190];
+let ids=["i1","i2","i3","i4","i5","i6","i7","i8"];
+let message="Dine Bistro Order:%0A";
+let total=0;
+
+for(let i=0;i<ids.length;i++){
+let qty=parseInt(document.getElementById(ids[i]).value) || 0;
+if(qty>0){
+message+=items[i]+" x "+qty+"%0A";
+total+=qty*prices[i];
+}
+}
+
+if(total==0){
+alert("Please select at least one item");
+return;
+}
+
+message+="%0ATotal Bill: ₹"+total;
+
+window.open("https://wa.me/919839513573?text="+message);
+}
+
+</script>
+
+</body>
+</html>
